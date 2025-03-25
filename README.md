@@ -1,6 +1,7 @@
-SQL Injection Lab
+# SQL Injection Lab
 
-Run the website using 
+Run the website using
+
 ` npm run dev `
 
 Run this by showing the how the web looked to a normal user:
