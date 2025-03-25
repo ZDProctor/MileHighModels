@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Form</title>
+  <!-- Link to your existing CSS file -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <!-- Login Form Section -->
+  <section class="container login-section">
+    <h2 class="form-title">User Login</h2>
+    <form action="/login" method="POST" class="registration-form">
+      
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="text" 
+          id="email" 
+          name="email" 
+          class="form-input" 
+          required
+          value=""
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-input" 
+          required
+          value=""
+        />
+      </div>
+
+      <button type="submit" class="form-button">Login</button>
+    </form>
+  </section>
+
+</body>
+</html>

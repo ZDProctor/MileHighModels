@@ -1,0 +1,42 @@
+{
+  "name": "db_lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./web/server.js",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js",
+    "hello": "nodemon ./hello.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.12.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "functions": 100,
+        "statements": 90,
+        "lines": 80
+      }
+    },
+    "coverageReporters": [
+      "html"
+    ]
+  }
+}

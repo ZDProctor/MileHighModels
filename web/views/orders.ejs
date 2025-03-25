@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/hero_bikes_logo.png" alt="Hero">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <% if (typeof UserID !== 'undefined' && UserID) { %>
+                    <li class="welcome-text">Welcome <%- FirstName %> <%- LastName %></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/orders?cid=<%- UserID %>">My Orders</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <br /><br />
+    <h1>My Orders</h1>
+
+    <form action="/orders" method="GET" class="sort-form">
+        <input type="hidden" id="cid" name="cid" value="<%= UserID %>"> <!-- Retain Customer ID -->
+        <select name="orderBy" id="sort">
+            <option value="orderNumber" <%= orderBy === 'orderNumber' ? 'selected' : '' %>>Order Number</option>
+            <option value="orderDate" <%= orderBy === 'orderDate' ? 'selected' : '' %>>Order Date</option>
+            <option value="shippedDate" <%= orderBy === 'shippedDate' ? 'selected' : '' %>>Shipped Date</option>
+            <option value="status" <%= orderBy === 'status' ? 'selected' : '' %>>Status</option>
+            <option value="comments" <%= orderBy === 'comments' ? 'selected' : '' %>>Comments</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    
+    <!-- Orders Table -->
+    <div class="table-container">
+        <br />
+        <table class="orders">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Shipped Date</th>
+                <th>Status</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (orders.length > 0) { %>
+                <% orders.forEach(order => { %>
+                    <tr>
+                        <td><%= order.orderNumber %></td>
+                        <td><%= new Date(order.orderDate).toLocaleDateString("en-US") %></td>
+                        <td><%= order.shippedDate ? new Date(order.shippedDate).toLocaleDateString("en-US") : 'N/A' %></td>
+                        <td><%= order.status %></td>
+                        <td><%= order.comments ? order.comments : 'No comments' %></td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="5">No orders found.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    </div>
+    
+
+    <br /><br />
+   <!-- Footer Section -->
+   <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#"><i class="fab fa-instagram-square"></i></a>
+                </div>
+                <p>&copy;2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</htm

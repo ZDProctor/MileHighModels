@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Honda CRF300L Rally</title>
+    <!-- Link to external CSS file (to be created by students) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/hero_bikes_logo.png" alt="Hero">
+            </div>
+            <nav>
+                <ul>
+                    <% if (typeof UserID !== 'undefined' && UserID) { %>
+                    <li><a href="/logout">Log Out</a></li>
+                    <% } else { %>
+                    <li><a href="/login">Log In</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+  <!-- Login Form Section -->
+  <section class="container login-section">
+    <h2 class="form-title">User Login</h2>
+    <form action="/login" method="POST" class="registration-form">
+      
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          type="username" 
+          id="username" 
+          name="username" 
+          class="form-input" 
+          required
+          value="cschmitt"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-input" 
+          required
+          value="86d27bc6"
+        />
+      </div>
+
+      <button type="submit" class="form-button">Login</button>
+    </form>
+  </section>
+
+
+   <!-- Footer Section -->
+   <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#"><i class="fab fa-instagram-square"></i></a>
+                </div>
+                <p>&copy;2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

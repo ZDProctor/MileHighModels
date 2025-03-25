@@ -1,0 +1,679 @@
+/*
+Selectors
+element - All elements with that name
+.class - All elements with that class
+#id - All elements with that id
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #e63946; /* Honda Red */
+    --secondary-color: #1d3557; /* Dark Blue */
+    --accent-color: #dcdcdc;
+    --background-color: #f5f5f5;
+    --text-color: #333333;
+    --light-text: #ffffff;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* NAV BAR */
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        display: none;  /*Toggle with JavaScript for interactivity */
+    }
+    
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 15px 0;
+    }
+}
+
+/* HERO */
+/* HERO */
+#hero {
+    /* Define the height of the hero section */
+    height: 100vh; /* Full viewport height */
+    
+    /* Remove background properties since we're using an img tag */
+    /* background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--light-text);
+    text-align: center;
+    overflow: hidden; /* Ensure child elements don't overflow */
+}
+
+/* Overlay */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1;
+}
+
+/* Hero Image Styling */
+.hero-image {
+    position: absolute; /* Position absolutely within #hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Ensure it sits behind the overlay and content */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+}
+
+/* Hero Content Styling */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensure it sits above the overlay and image */
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 4.2em;
+}
+.hero-content p {
+    font-size: 2em;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+}
+
+
+/* Features Area */
+#features {
+    padding: 80px 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+#features h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-item {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item img {
+    width: auto;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.feature-item p {
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+/* Gallery */
+#gallery {
+    padding: 80px 0;
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+#gallery h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+
+
+#reviews {
+    padding: 80px 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+#reviews h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+}
+
+.reviews-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.review-item p {
+    font-style: italic;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.review-item h4 {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.review-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    background-color: var(--accent-color);
+    color: var(--light-text); /* White */
+    padding: 6px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-media a {
+    margin: 0 10px;
+    color: var(--light-text);
+    display: inline-block;
+    text-decoration:none;
+    transition: transform 0.3s ease;
+}
+
+
+
+footer p {
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+
+/* Responsive area */
+/* Example Breakpoints */
+@media (max-width: 1200px) {
+    #hero h1 {
+        font-size: 2.5em;
+    }
+
+    #features h2,
+    #gallery h2,
+    #reviews h2,
+    #contact h2 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 992px) {
+    .features-grid,
+    .gallery-grid,
+    .reviews-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    #hero {
+        height: auto;
+        padding: 60px 0;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .features-grid,
+    .gallery-grid,
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    #hero h1 {
+        font-size: 2em;
+    }
+
+    #hero p {
+        font-size: 1em;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .social-media a img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+
+/* Forms */
+/* Registration Form Classes */
+
+/* Ensures the form is visible below your fixed header (adjust as needed) */
+.register-section, .login-section {
+    margin-top: 100px;
+    width: 250px;
+  }
+  
+  /* Form Title */
+  .form-title {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: var(--secondary-color); /* Or adjust to desired color */
+  }
+  
+  /* Common group wrapper for each input+label */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Label styling */
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  /* Input fields styling */
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+  }
+  
+  /* Submit button styling */
+  .form-button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .form-button:hover {
+    background-color: #c32f39; /* Slightly darker shade of your primary color */
+    transform: scale(1.05);
+  }
+  
+  /* Tables */
+  /* Center the table container */
+.table-container {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    margin-top: 20px;  /* Adds space above the table */
+}
+  .products {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+.products thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+.products th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table Body */
+.products td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternate Row Colors */
+.products tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover Effect */
+.products tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.2s ease-in-out;
+}
+
+/* Centering Numeric Columns */
+.products td:nth-child(7), /* Stock */
+.products td:nth-child(8) { /* MSRP */
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .products {
+        font-size: 12px;
+    }
+    .products th, .products td {
+        padding: 8px;
+    }
+}
+
+
+/* Search Box */
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 120px;
+}
+
+.search-form input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-form button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Orders table styling */
+.orders {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.orders thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+.orders th, .orders td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row colors */
+.orders tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect */
+.orders tbody tr:hover {
+    background-color: #f1f1f1;
+    transition: 0.2s ease-in-out;
+}
+
+/* Sorting form */
+.sort-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sort-form select, .sort-form button {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.sort-form button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.sort-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Navigation bar */
+.main-nav {
+    background-color: #007BFF;  /* Nice blue background */
+    padding: 15px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Flexbox for alignment */
+.main-nav ul {
+    display: flex;
+    justify-content: center; /* Center menu items */
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    margin: auto 0 auto 200px;
+}
+
+/* Menu items */
+.main-nav li {
+    margin: 0 20px; /* Spacing between items */
+}
+
+/* Links */
+.main-nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Welcome message styling */
+.welcome-text {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav li {
+        margin: 10px 0;
+    }
+}
