@@ -1,73 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 Honda CRF300L Rally</title>
+    <title>Your Dashboard</title>
     <!-- Link to external CSS file (to be created by students) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
 
     <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
-                <img src="images/hero_bikes_logo.png" alt="Hero">
+                <img src="images/00_Icon.png" alt="Hero">
             </div>
-            <nav class="main-nav">
+            <nav>
                 <ul>
-                    <% if (typeof UserID !== 'undefined' && UserID) { %>
-                    <li class="welcome-text">Welcome <%- FirstName %> <%- LastName %></li>
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/orders?cid=<%- UserID %>">My Orders</a></li>
-                    <li><a href="/logout">Log Out</a></li>
-                    <% } %>
+                    <%  if (typeof UserID !=='undefined' && UserID) { %>
+                        <li class="welcome-text">Welcome <%- FirstName %> <%- LastName %></li>
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                        <% } %>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <!-- Hero Image -->
+            <div class="hero-image">
+                <img src="images/09_DashboardLanding.png" alt="Welcome to your dashboard.">
+            </div>
+            <!-- Hero Text Content -->
+            <div class="hero-content">
+                <h1>Lets find your new favorite model.</h1>
+                <a href="/neworder" class="cta-dash-button">Place an order</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="search-title">
+        <h2>Your Orders</h2>
+    </section>
+<!--
     <form action="/dashboard" method="GET" class="search-form">
-        <input type="text" name="query" placeholder="Search products by name..." value="<%= typeof query !== 'undefined' ? query : '' %>">
+        <input type="text" name="query" placeholder="Search products by name..."
+            value="<%= typeof query !== 'undefined' ? query : '' %>">
         <button type="submit">Search</button>
     </form>
+-->
 
     <!-- Product Table -->
     <div class="table-container">
-    <table class="products">
-        <thead>
-            <tr>
-                <th>Product Code</th>
-                <th>Product Name</th>
-                <th>Description</th>
-                <th>MSRP</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% if (products.length > 0) { %>
-                <% products.forEach(product => { %>
-                    <tr>
-                        <td><%= product.productCode %></td>
-                        <td><%= product.productName %></td>
-                        <td><%= product.productDescription %></td>
-                        <td>$<%= product.MSRP %></td>
-                    </tr>
-                <% }) %>
-            <% } else { %>
+        <table class="products">
+            <thead>
                 <tr>
-                    <td colspan="8">No products found.</td>
+                    <th>Order Number</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
                 </tr>
-            <% } %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% if (orders[0].length > 0) { %>
+                    <% orders[0].forEach(order => { %>
+                        <tr>
+                            <!-- Link to the invoice page using the orderNumber -->
+                            <td><a href="/invoice?id=<%= order.orderNumber %>"><%= order.orderNumber %></a></td>
+                            <td><%= order.orderDate.toISOString().split('T')[0] %></td>
+                            <td><%= order.status %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3">No orders found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
     </div>
-    
 
-   <!-- Footer Section -->
-   <footer>
+    <!-- Footer Section -->
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="social-media">
@@ -81,4 +106,5 @@
     </footer>
 
 </body>
+
 </html>

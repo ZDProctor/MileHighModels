@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mile High Models</title>
+    <!-- Link to external CSS file (to be created by students) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/00_Icon.png" alt="Hero">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#promise">About Us</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <% console.log(locals); %>
+                    <% if (typeof UserID !=='undefined' && UserID) { %>
+                        <li><a href="/dashboard"> Hello, <%= locals.FirstName %> </a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                        <% } else { %>
+                            <li><a href="/register">Register</a></li>
+                            <div class="dropdownLogin">
+                                <li><a class="dropbtn">Login</a></li>
+                                <div class="dropdown-content" id="myDropdown">
+                                    <form action="/login" method="POST" class="dropdown-login-form">
+                                        <label for="email">Email:</label>
+                                        <input type="text" id="email" name="email" class="form-input" required>
+                                        
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="password" class="form-input" required>
+                                        
+                                        <button type="submit" class="form-button">Login</button>
+                                    </form>
+                                </div>
+                                <% } %>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <!-- Hero Image -->
+            <div class="hero-image">
+                <img src="images/01_Hero.png" alt="Welcome to Mile High Models">
+            </div>
+            <!-- Hero Text Content -->
+            <div class="hero-content">
+                <h1>Welcome to Mile High Models</h1>
+                <a href="#gallery" class="cta-button">See what we have in store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promise Section -->
+    <section id="promise">
+        <div class="container">
+            <h2>Our Promise</h2>
+            <div class="promise-grid">
+                <div class="promise-item">
+                    <img src="images/Promise_00.png" alt="Friendly Service">
+                    <h3>Friendly Service</h3>
+                    <p>Our trained customer service reps are always available for your needs.</p>
+                </div>
+                <div class="promise-item">
+                    <img src="images/Promise_01.png" alt="Quality Models">
+                    <h3>Quality Models</h3>
+                    <p>We stock and supply only the highest quality models from certified manufacturers.</p>
+                </div>
+                <div class="promise-item">
+                    <img src="images/Promise_02.png" alt="Reliable Delivery">
+                    <h3>Reliable Delivery</h3>
+                    <p>Guaranteed deliveries, on time, and undamaged.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product lines slideshow -->
+    <!-- Container for the image gallery -->
+    <section id="gallery">
+        <div class="container">
+            <h2>Our Product Lines</h2>
+        </div>
+        <div class="container">
+            <!-- Full-width images with number text -->
+
+            <div class="mySlides">
+                <div class="numbertext">1 / 7</div>
+                <img src="images/02_Classic.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 7</div>
+                <img src="images/03_Motorcycle.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 7</div>
+                <img src="images/04_Plane.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 7</div>
+                <img src="images/05_Ship.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">5 / 7</div>
+                <img src="images/06_Train.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">6 / 7</div>
+                <img src="images/07_Bus.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">7 / 7</div>
+                <img src="images/08_Vintage.png" style="width:100%">
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+
+            <!-- Image text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+            <!-- Thumbnail images -->
+            <div class="row">
+                <div class="column">
+                    <img class="demo cursor" src="images/02_Classic.png" style="width:100%" onclick="currentSlide(1)"
+                        alt="Classic Cars">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/03_Motorcycle.png" style="width:100%" onclick="currentSlide(2)"
+                        alt="Motorcycles">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/04_Plane.png" style="width:100%" onclick="currentSlide(3)"
+                        alt="Planes">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/05_Ship.png" style="width:100%" onclick="currentSlide(4)"
+                        alt="Ships">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/06_Train.png" style="width:100%" onclick="currentSlide(5)"
+                        alt="Trains">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/07_Bus.png" style="width:100%" onclick="currentSlide(6)"
+                        alt="Trucks and Buses">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="images/08_Vintage.png" style="width:100%" onclick="currentSlide(7)"
+                        alt="Vintage Cars">
+                </div>
+            </div>
+        </div>
+
+
+        <script nonce="<%= nonce %>">
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const loginButton = document.querySelector('.dropbtn');
+
+                loginButton.addEventListener('click', () => loginDrop());
+            });
+            //Dropdown login menu
+            function loginDrop() {
+                const dropdown = document.getElementById("myDropdown");
+                dropdown.classList.toggle("show");
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.addEventListener("click", function (e) {
+                const dropdown = document.getElementById("myDropdown");
+                const dropbtn = document.querySelector(".dropbtn");
+
+                // Check if the click is outside the dropdown or button
+                if (!dropdown.contains(e.target) && !dropbtn.contains(e.target)) {
+                    dropdown.classList.remove("show");
+                }
+            });
+
+            //Slideshow functionality for the image gallery
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const prevButton = document.querySelector('.prev');
+                const nextButton = document.querySelector('.next');
+
+                prevButton.addEventListener('click', () => plusSlides(-1));
+                nextButton.addEventListener('click', () => plusSlides(1));
+            });
+
+            // Next/previous controls
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            // Thumbnail image controls
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("demo");
+                let captionText = document.getElementById("caption");
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+                captionText.innerHTML = dots[slideIndex - 1].alt;
+            }
+        </script>
+
+        <!-- Reviews Section -->
+        <section id="reviews">
+            <div class="container">
+                <h2>What Customers Are Saying</h2>
+                <div class="reviews-grid">
+                    <div class="review-item">
+                        <p>"Thought I was getting a great deal on a real car, the model is great though."</p>
+                        <h4>— Rex H.</h4>
+                    </div>
+                    <div class="review-item">
+                        <p>"I was blown away by how quickly my order arrived!"</p>
+                        <h4>— Luc S.</h4>
+                    </div>
+                    <div class="review-item">
+                        <p>"Mile High Models is the only brand I trust for sourcing my models for my collection."</p>
+                        <h4>— Brett H.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer Section -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter-square"></i></a>
+                        <a href="#"><i class="fab fa-instagram-square"></i></a>
+                    </div>
+                    <p>&copy;2025. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Order Form</title>
+    <!-- Link to your existing CSS file -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/00_Icon.png" alt="Hero">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <% if (typeof UserID !=='undefined' && UserID) { %>
+                        <% console.log(locals); %>
+                        <% console.log(locals.FirstName) %>
+                        <li><a href="/dashboard"> Hello, <%= locals.FirstName %></a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                        <% } else { %>
+                            <% } %>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Order Form Section -->
+
+    <section class="container register-section">
+        <h2 class="form-title">New Order</h2>
+        <form action="/neworder" method="POST" class="order-form">
+            <div id="order-items">
+                <div class="order-item">
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <!-- Input field with type-ahead functionality -->
+                        <input list="model-options" id="model" name="model[]" class="form-input"
+                            placeholder="Type to search..." required>
+                        <!-- Datalist for type-ahead options -->
+                        <datalist id="model-options">
+                            <% products.forEach(product=> { %>
+                                <option value="<%= product.productName %>"></option>
+                                <% }); %>
+                        </datalist>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="quantity[]" class="form-input" min="1" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea id="comments" name="comments" class="form-input" rows="4" placeholder="Add any comments about your order..."></textarea>
+            </div>
+            <button type="button" id="add-order-item" class="form-button">+ Add New Order Item</button>
+            <button type="submit" class="form-button">Submit Order</button>
+        </form>
+
+        <script nonce="<%= nonce %>">
+            document.getElementById('add-order-item').addEventListener('click', () => {
+                const orderItems = document.getElementById('order-items');
+                const newItem = document.querySelector('.order-item').cloneNode(true);
+                newItem.querySelectorAll('input, textarea, select').forEach(input => input.value = '');
+                orderItems.appendChild(newItem);
+            });
+            // Live search functionality integrated into the dropdown
+            document.getElementById('model-search').addEventListener('input', function () {
+                const searchValue = this.value.toLowerCase();
+                const modelDropdown = document.getElementById('model');
+                const options = Array.from(modelDropdown.options); // Convert options to an array
+
+                // Clear the dropdown except for the placeholder
+                const placeholder = options[0]; // Keep the placeholder option
+                modelDropdown.innerHTML = ''; // Clear all options
+                modelDropdown.appendChild(placeholder);
+
+                // Filter and re-add matching options
+                options.slice(1).forEach(option => { // Skip the placeholder
+                    const text = option.textContent.toLowerCase();
+                    if (text.includes(searchValue)) {
+                        modelDropdown.appendChild(option);
+                    }
+                });
+
+                // Reset the dropdown selection to the placeholder
+                modelDropdown.selectedIndex = 0;
+            });
+
+            // Add new order item functionality
+            document.getElementById('add-order-item').addEventListener('click', () => {
+                const orderItems = document.getElementById('order-items');
+                const newItem = document.querySelector('.order-item').cloneNode(true);
+                newItem.querySelectorAll('input, textarea, select').forEach(input => input.value = '');
+                orderItems.appendChild(newItem);
+            });
+        </script>
+    </section>
+    </section>
+
+</body>
+
+</html>

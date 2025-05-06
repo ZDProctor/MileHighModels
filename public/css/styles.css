@@ -4,15 +4,19 @@ element - All elements with that name
 .class - All elements with that class
 #id - All elements with that id
 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 :root {
-    --primary-color: #e63946; /* Honda Red */
-    --secondary-color: #1d3557; /* Dark Blue */
+    --primary-color: #e63946;
+    /* Honda Red */
+    --secondary-color: #1d3557;
+    /* Dark Blue */
     --accent-color: #dcdcdc;
     --background-color: #f5f5f5;
     --text-color: #333333;
@@ -35,6 +39,7 @@ body {
 }
 
 header {
+    height: 100px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -59,30 +64,104 @@ header .container {
 nav ul {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 nav ul li {
-    margin-left: 30px;
+    margin-left: 10px;
+    position: relative;
+    /* For dropdown positioning */
 }
 
 nav ul li a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    padding: 5px 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
 }
 
 nav ul li a:hover {
     color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropbtn {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Dropdown Styling */
+.dropdown-content {
+    padding: 10px 5px;
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    /* Position below the dropdown button */
+    right: 0;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+/* Show dropdown when the "show" class is added */
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-login-form .form-input {
+    width: 200px;
+    /* Adjust the width as needed */
+}
+
+.pdf {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.pdf,
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.invoice-section {
+    margin-top: 50px;
 }
 
 /* Responsive Navigation */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
-        display: none;  /*Toggle with JavaScript for interactivity */
+        display: none;
+        /* Toggle with JavaScript for interactivity */
     }
-    
+
     nav ul.show {
         display: flex;
     }
@@ -90,61 +169,66 @@ nav ul li a:hover {
     nav ul li {
         margin: 15px 0;
     }
+
+    .dropdown-content {
+        position: static;
+        /* Adjust for stacking in mobile view */
+        box-shadow: none;
+    }
 }
 
 /* HERO */
-/* HERO */
 #hero {
     /* Define the height of the hero section */
-    height: 100vh; /* Full viewport height */
-    
-    /* Remove background properties since we're using an img tag */
-    /* background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    display: grid;
     position: relative;
     color: var(--light-text);
     text-align: center;
-    overflow: hidden; /* Ensure child elements don't overflow */
+    overflow: hidden;
+    /* Ensure child elements don't overflow */
 }
+
 
 /* Overlay */
 #hero::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black */
     z-index: 1;
 }
 
 /* Hero Image Styling */
 .hero-image {
-    position: absolute; /* Position absolutely within #hero */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    /* Full width of the viewport */
     height: 100%;
-    overflow: hidden;
-    z-index: 0; /* Ensure it sits behind the overlay and content */
+    /* Maintain full height */
+    overflow: visible;
+    z-index: 0;
+    /* Ensure it sits behind other elements */
 }
 
 .hero-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
+    /* Ensure the image spans the full height */
+    object-fit: contain;
 }
 
 /* Hero Content Styling */
 .hero-content {
     position: relative;
-    z-index: 2; /* Ensure it sits above the overlay and image */
+    transform: translate(10%, 45%);
+    z-index: 2;
+    /* Ensure it sits above the overlay and image */
     max-width: 800px;
     padding: 20px;
 }
@@ -152,11 +236,28 @@ nav ul li a:hover {
 .hero-content h1 {
     font-size: 4.2em;
 }
+
 .hero-content p {
     font-size: 2em;
 }
 
+.dash-content {
+    text-align: center;
+    position: relative;
+    transform: translate(-10%, 0%);
+    z-index: 2;
+    /* Ensure it sits above the overlay and image */
+    max-width: 1000px;
+    padding: 20px;
+}
+
+
+.dash-content h1 {
+    font-size: 4.2em;
+}
+
 .cta-button {
+    transform: translate(30%, 0%);
     display: inline-block;
     padding: 15px 30px;
     background-color: var(--primary-color);
@@ -169,54 +270,83 @@ nav ul li a:hover {
 }
 
 .cta-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translate(30%, 0%);
+
 }
 
 
-/* Features Area */
-#features {
+.cta-dash-button {
+    transform: translate(60%, 0%);
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-dash-button:hover {
+    transform: scale(1.05) translate(60%, 0%);
+
+}
+
+/* Search Form */
+#search-title {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    color: var(--secondary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* promise Area */
+#promise {
     padding: 80px 0;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     text-align: center;
 }
 
-#features h2 {
+#promise h2 {
     font-size: 2.5em;
     margin-bottom: 40px;
     color: var(--secondary-color);
 }
 
-.features-grid {
+.promise-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
-.feature-item {
+.promise-item {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-item:hover {
+.promise-item:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.feature-item img {
+.promise-item img {
     width: auto;
     height: 120px;
     margin-bottom: 20px;
 }
 
-.feature-item h3 {
+.promise-item h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: var(--primary-color);
 }
 
-.feature-item p {
+.promise-item p {
     font-size: 1em;
     color: var(--text-color);
 }
@@ -224,7 +354,7 @@ nav ul li a:hover {
 /* Gallery */
 #gallery {
     padding: 80px 0;
-    background-color: var(--background-color);
+    background-color: #ffffff;
     text-align: center;
 }
 
@@ -232,6 +362,7 @@ nav ul li a:hover {
     font-size: 2.5em;
     margin-bottom: 40px;
     color: var(--secondary-color);
+    text-align: center;
 }
 
 .gallery-grid {
@@ -255,10 +386,131 @@ nav ul li a:hover {
 }
 
 
+/* Slideshow */
+* {
+    box-sizing: content-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+    position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+    text-align: center;
+    height: 500px;
+    /* Set the desired height for the slides */
+    overflow: hidden;
+    /* Ensure the image is cropped */
+}
+
+/* Ensure the images are cropped, not scaled */
+.mySlides img {
+    width: 100%;
+    /* Full width of the container */
+    height: 100%;
+    /* Full height of the container */
+    object-fit: contain;
+    /* Crop the image to fit the container */
+}
+
+.productsHead {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Position the previous button on the left */
+.prev {
+    color: black;
+    left: 0;
+    /* Align to the left edge */
+    border-radius: 0 3px 3px 0;
+}
+
+/* Position the next button on the right */
+.next {
+    color: black;
+    right: 0;
+    /* Align to the right edge */
+    border-radius: 3px 0 0 3px;
+}
+
+/* Add hover effect for the buttons */
+.prev:hover,
+.next:hover {
+    background-color: rgb(153, 148, 148);
+    /* Darker background on hover */
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: black;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    display: none;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Seven columns side by side */
+.column {
+    float: left;
+    width: 14.28%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
 
 #reviews {
     padding: 80px 0;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     text-align: center;
 }
 
@@ -276,7 +528,7 @@ nav ul li a:hover {
 }
 
 .review-item {
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     max-width: 300px;
@@ -302,7 +554,8 @@ nav ul li a:hover {
 /* Footer */
 footer {
     background-color: var(--accent-color);
-    color: var(--light-text); /* White */
+    color: var(--light-text);
+    /* White */
     padding: 6px 0;
     text-align: center;
 }
@@ -317,7 +570,7 @@ footer {
     margin: 0 10px;
     color: var(--light-text);
     display: inline-block;
-    text-decoration:none;
+    text-decoration: none;
     transition: transform 0.3s ease;
 }
 
@@ -336,16 +589,18 @@ footer p {
         font-size: 2.5em;
     }
 
-    #features h2,
+    #promise h2,
     #gallery h2,
     #reviews h2,
     #contact h2 {
         font-size: 2em;
+        text-align: center;
     }
 }
 
 @media (max-width: 992px) {
-    .features-grid,
+
+    .promise-grid,
     .gallery-grid,
     .reviews-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -377,7 +632,7 @@ footer p {
         text-align: center;
     }
 
-    .features-grid,
+    .promise-grid,
     .gallery-grid,
     .reviews-grid {
         grid-template-columns: 1fr;
@@ -409,41 +664,44 @@ footer p {
 /* Registration Form Classes */
 
 /* Ensures the form is visible below your fixed header (adjust as needed) */
-.register-section, .login-section {
-    margin-top: 100px;
+.register-section,
+.login-section,
+.order-section {
+    margin-top: 150px;
     width: 250px;
-  }
-  
-  /* Form Title */
-  .form-title {
+}
+
+/* Form Title */
+.form-title {
     margin-bottom: 20px;
     font-size: 1.8em;
-    color: var(--secondary-color); /* Or adjust to desired color */
-  }
-  
-  /* Common group wrapper for each input+label */
-  .form-group {
+    color: var(--secondary-color);
+    /* Or adjust to desired color */
+}
+
+/* Common group wrapper for each input+label */
+.form-group {
     margin-bottom: 15px;
-  }
-  
-  /* Label styling */
-  .form-label {
+}
+
+/* Label styling */
+.form-label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
     color: var(--text-color);
-  }
-  
-  /* Input fields styling */
-  .form-input {
+}
+
+/* Input fields styling */
+.form-input {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--accent-color);
     border-radius: 4px;
-  }
-  
-  /* Submit button styling */
-  .form-button {
+}
+
+/* Submit button styling */
+.form-button {
     padding: 10px 20px;
     background-color: var(--primary-color);
     color: var(--light-text);
@@ -451,21 +709,26 @@ footer p {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .form-button:hover {
-    background-color: #c32f39; /* Slightly darker shade of your primary color */
+    margin-bottom: 10px;
+}
+
+.form-button:hover {
+    background-color: #c32f39;
+    /* Slightly darker shade of your primary color */
     transform: scale(1.05);
-  }
-  
-  /* Tables */
-  /* Center the table container */
+}
+
+/* Tables */
+/* Center the table container */
 .table-container {
     display: flex;
-    justify-content: center;  /* Centers horizontally */
-    margin-top: 20px;  /* Adds space above the table */
+    justify-content: center;
+    /* Centers horizontally */
+    margin-top: 20px;
+    /* Adds space above the table */
 }
-  .products {
+
+.products {
     border-collapse: collapse;
     margin-bottom: 20px;
     margin-left: 10px;
@@ -508,8 +771,10 @@ footer p {
 }
 
 /* Centering Numeric Columns */
-.products td:nth-child(7), /* Stock */
-.products td:nth-child(8) { /* MSRP */
+.products td:nth-child(7),
+/* Stock */
+.products td:nth-child(8) {
+    /* MSRP */
     text-align: center;
 }
 
@@ -518,7 +783,9 @@ footer p {
     .products {
         font-size: 12px;
     }
-    .products th, .products td {
+
+    .products th,
+    .products td {
         padding: 8px;
     }
 }
@@ -530,7 +797,7 @@ footer p {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    margin-top: 120px;
+    margin-top: 20px;
 }
 
 .search-form input {
@@ -575,7 +842,8 @@ footer p {
     color: white;
 }
 
-.orders th, .orders td {
+.orders th,
+.orders td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -599,7 +867,8 @@ footer p {
     margin-bottom: 20px;
 }
 
-.sort-form select, .sort-form button {
+.sort-form select,
+.sort-form button {
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
@@ -617,17 +886,51 @@ footer p {
     background-color: #0056b3;
 }
 
+#model-search {
+    margin-bottom: 10px;
+    width: 100%;
+    /* Match the dropdown width */
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
 /* Navigation bar */
 .main-nav {
-    background-color: #007BFF;  /* Nice blue background */
+    background-color: #007BFF;
+    /* Nice blue background */
     padding: 15px 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
 }
 
 /* Flexbox for alignment */
 .main-nav ul {
     display: flex;
-    justify-content: center; /* Center menu items */
+    justify-content: center;
+    /* Center menu items */
     align-items: center;
     list-style: none;
     padding: 0;
@@ -640,7 +943,8 @@ h1 {
 
 /* Menu items */
 .main-nav li {
-    margin: 0 20px; /* Spacing between items */
+    margin: 0 20px;
+    /* Spacing between items */
 }
 
 /* Links */
@@ -665,6 +969,7 @@ h1 {
     font-size: 16px;
     font-weight: bold;
 }
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {

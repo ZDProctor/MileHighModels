@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img src="images/00_Icon.png" alt="Hero" />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section class="container invoice-section">
+      <h1>Invoice</h1>
+      <%= console.log("pdfPath"); %>
+      <%= console.log(pdfPath) %>
+      <% pdfPath = pdfPath.split('public')[1]; %>
+      <%= console.log("pdfPath after substring"); %>
+      <%= console.log(pdfPath) %>
+
+      <embed class="pdf" 
+      src= <%= pdfPath %>
+   width="800" height="500">
+      <!--
+        <div class="invoice-details">
+            <% console.log(invoice); %>
+            <p><strong>Order Number:</strong> <%= invoiceId %> </p>
+            <p><strong>Order Date:</strong> <%= invoice[0][0].orderDate.toISOString().split('T')[0] %></p>
+            <p><strong>Customer Name:</strong> <%= locals.firstName %></p>
+            <p><strong>Status:</strong> <%= invoice[0][0].status %></p>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% console.log("invoice [1]"); %>
+                <% console.log(invoice[1]); %>
+                <% let totalPrice = 0; %>
+                <% invoice[1].forEach(item => { %>
+                    <tr>
+                        <td><%= item.productCode %></td>
+                        <td><%= item.quantityOrdered %></td>
+                        <td>$<%= item.priceEach %></td>
+                        <td>$<%= (item.quantity * item.priceEach) %></td>
+                        <% totalPrice += (item.quantity * item.priceEach); %>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="invoice-total">
+            <p><strong>Total Price:</strong> $<%= totalPrice %></p>
+        </div>
+
+        <div class="invoice-actions">
+            <form action="/generate-pdf" method="POST" target="_blank">
+                <input type="hidden" name="invoiceId" value="<%= invoiceId %>">
+                <button type="submit">Download PDF</button>
+            </form>
+            <a href="/dashboard" class="form-button">Return to Dashboard</a>
+        </div>
+    -->
+      <div class="invoice-actions">
+        <a href="/dashboard" class="form-button">Return to Dashboard</a>
+      </div>
+    </section>
+  </body>
+</html>
